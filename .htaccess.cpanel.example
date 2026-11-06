@@ -1,0 +1,27 @@
+# ==============================================================================
+# FileVela (.htaccess template untuk Document Root cPanel — filevela.biz.id)
+# Catatan: Saat Anda mengaktifkan "Setup Node.js App" di cPanel, CloudLinux
+# Passenger akan otomatis menyisipkan blok:
+#   # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN ... END
+# Tambahkan aturan di bawah ini DI BAWAH blok CloudLinux Passenger tersebut.
+# ==============================================================================
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # 1. Blokir akses HTTP langsung ke direktori sensitif & penyimpanan sementara
+  RewriteRule ^(?:\.storage|\.git|\.next|node_modules|src|tests)(?:/|$) - [F,L,NC]
+  RewriteRule ^(?:\.env.*|package(?:-lock)?\.json|tsconfig\.json|vitest\.config\.ts)$ - [F,L,NC]
+
+  # 2. Paksa protokol HTTPS dan kanonikalisasi www.filevela.biz.id -> filevela.biz.id
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP_HOST} ^www\.filevela\.biz\.id$ [NC]
+  RewriteRule ^ https://filevela.biz.id%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+# 3. Izinkan unggahan berkas hingga ~55 MB (batas aplikasi FileVela: 50 MB)
+LimitRequestBody 57671680
+
+# 4. Nonaktifkan directory listing
+Options -Indexes
+

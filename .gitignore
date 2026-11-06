@@ -1,0 +1,42 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# Testing and coverage
+/coverage
+
+# Next.js build output
+/.next/
+/.next-cpanel-build/
+/out/
+/build
+/dist-cpanel/
+filevela-cpanel-*.zip
+
+# Ephemeral runtime private storage
+/.storage/
+
+# Environment variables
+.env*.local
+.env
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Operating system files
+.DS_Store
+*.pem
+Thumbs.db
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Scratch directory
+/scratch/
+
+# Agent teamwork logs
+.agents/teamwork/
